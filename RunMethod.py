@@ -1,5 +1,6 @@
 import json
 import time
+import traceback
 
 from BallDataParse import BallDataParse
 from DButil import DButil
@@ -12,17 +13,18 @@ def run_task():
     try:
         data = JsonUtil().http_get(url)
         data=data[8:-2]
-        print(data)
         jsonData = json.loads(data)
         list = jsonData['data']
         parse = BallDataParse()
         for value in list.values():
+            print(value)
             sql = parse.getMatch(value)
             obs = parse.getObbs(value)
             db = DButil()
             db.run(sql)
             db.run(obs)
-    except Exception:
+    except Exception as e:
+        traceback.print_exc()
         time.sleep(60)
 
 

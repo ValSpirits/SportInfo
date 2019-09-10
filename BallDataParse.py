@@ -1,9 +1,9 @@
 class BallDataParse:
     @classmethod
     def getObbs(cls,value):
-        win_p = value['had']['h']
-        flat_p = value['had']['d']
-        lose_p = value['had']['a']
+        win_p = value['had']['h'] if "had" in value else 0.00
+        flat_p = value['had']['d']if "had" in value else 0.00
+        lose_p = value['had']['a']if "had" in value else 0.00
         let_win_p = value['hhad']['h']
         let_flat_p = value['hhad']['d']
         let_lose_p = value['hhad']['a']

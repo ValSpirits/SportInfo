@@ -1,4 +1,5 @@
 import configparser
+import traceback
 
 import pymysql as pymysql
 
@@ -31,9 +32,9 @@ class DButil:
              print(sql)
              # 提交到数据库执行
              db.commit()
-         except Exception:  # 方法一：捕获所有异常
+         except Exception as e:  # 方法一：捕获所有异常
              # 如果发生异常，则回滚
-             print("发生异常", Exception)
+             traceback.print_exc()
              db.rollback()
          finally:
              # 最终关闭数据库连接
